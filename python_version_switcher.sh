@@ -43,7 +43,7 @@ log "Latest Python installation: $latest_python (Python $latest_version)"
 log "Making the latest Python installation the default in terminal..."
 
 # For bash
-BASH_PROFILE="$HOME/.bashrc"
+BASH_PROFILE="$HOME/.bash_profile"
 if [ -L "$BASH_PROFILE" ]; then
   BASH_PROFILE=$(readlink -f "$BASH_PROFILE")
 fi
