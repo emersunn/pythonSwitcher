@@ -23,9 +23,9 @@ latest_python=""
 
 for python in "${PYTHON_INSTALLS[@]}"; do
   if [ -x "$python" ]; then
-    current_version="$($python --version 2>&1)"
-    log "Found Python installation: $python ($current_version)"
-    if [[ "$current_version" > "$latest_version" ]]; then
+    current_version="$($python --version 2>&1 | cut -d' ' -f2)"
+    log "Found Python installation: $python (Python $current_version)"
+    if [[ "$(echo -e "${current_version}\n${latest_version}" | sort -V | tail -n1)" == "${current_version}" ]]; then
       latest_version="$current_version"
       latest_python="$python"
     fi
@@ -37,7 +37,7 @@ if [ -z "$latest_python" ]; then
   exit 1
 fi
 
-log "Latest Python installation: $latest_python ($latest_version)"
+log "Latest Python installation: $latest_python (Python $latest_version)"
 
 # Make the latest Python installation the default in terminal
 log "Making the latest Python installation the default in terminal..."
